@@ -28,5 +28,7 @@ def create_app(config_class=Config):
     app.register_blueprint(main, url_prefix='/')
     app.register_blueprint(auth, url_prefix='/')
 
+    return app
+
 
 from app import models
