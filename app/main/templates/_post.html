@@ -1,0 +1,22 @@
+<table class="table table-hover">
+    <tr>
+        <td style="width: 70px">
+            <a href="{{ url_for('main.user', username=post.author.username) }}">
+                {{ post.author.username }}
+            </a>
+        </td>
+        <td>
+            {% set user_link %}
+            <span class="user_popup">
+                <a href="{{ url_for('main.user', username=post.author.username) }}">
+                    {{ post.author.username }}
+                </a>
+            </span>
+            {% endset %}
+            {{ '{username} posted {time}'.format(username=user_link,
+                time=moment(post.timestamp).fromNow()) }}
+            <br>
+            <span id="post{{ post.id }}">{{ post.body }}</span>
+        </td>
+    </tr>
+</table>
