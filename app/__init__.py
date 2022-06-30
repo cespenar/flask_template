@@ -27,9 +27,11 @@ def create_app(config_class=Config):
 
     from app.main import main
     from app.auth import auth
+    from app.errors import errors
 
     app.register_blueprint(main, url_prefix='/')
     app.register_blueprint(auth, url_prefix='/')
+    app.register_blueprint(errors, url_prefix='/')
 
     return app
 
