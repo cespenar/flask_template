@@ -2,7 +2,6 @@ from flask import Flask
 from flask_bootstrap import Bootstrap5
 from flask_login import LoginManager
 from flask_migrate import Migrate
-from flask_moment import Moment
 from flask_sqlalchemy import SQLAlchemy
 
 from config import Config
@@ -12,7 +11,6 @@ migrate = Migrate()
 login = LoginManager()
 login.login_view = 'auth.login'
 bootstrap = Bootstrap5()
-moment = Moment()
 
 
 def create_app(config_class=Config):
@@ -23,7 +21,6 @@ def create_app(config_class=Config):
     migrate.init_app(app, db)
     login.init_app(app)
     bootstrap.init_app(app)
-    moment.init_app(app)
 
     from app.main import main
     from app.auth import auth
