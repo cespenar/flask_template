@@ -7,7 +7,7 @@
         </td>
         <td>
             {{ '{username} posted {time}'.format(username=post.author.username,
-                time=post.timestamp.strftime('%d-%b-%Y %H:%M:%S')) }}
+                time=post.timestamp.strftime('%d-%b-%Y %H:%M:%S %Z')) }}
             <br>
             <span>{{ post.data }}</span>
         </td>
