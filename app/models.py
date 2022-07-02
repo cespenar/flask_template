@@ -28,20 +28,19 @@ class User(UserMixin, db.Model):
         return check_password_hash(self.password_hash, password)
 
 
-
 @login.user_loader
 def load_user(user_id: str | int):
     return User.query.get(int(user_id))
 
 
 class Post(db.Model):
-    entry_id = db.Column(db.Integer, primary_key=True)
+    post_id = db.Column(db.Integer, primary_key=True)
     data = db.Column(db.String(1000))
     timestamp = db.Column(db.DateTime, index=True, default=datetime.utcnow)
     user_id = db.Column(db.Integer, db.ForeignKey('user.user_id'))
 
     def __repr__(self):
-        return f'<Post {self.body}>'
+        return f'<Post {self.data}>'
 
     def get_id(self) -> int:
-        return self.entry_id
+        return self.post_id

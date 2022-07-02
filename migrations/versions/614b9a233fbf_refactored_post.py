@@ -1,8 +1,8 @@
-"""user and post tables
+"""refactored Post
 
-Revision ID: 7da611f8586f
+Revision ID: 614b9a233fbf
 Revises: 
-Create Date: 2022-06-26 17:43:57.785604
+Create Date: 2022-07-02 15:21:23.995930
 
 """
 from alembic import op
@@ -10,7 +10,7 @@ import sqlalchemy as sa
 
 
 # revision identifiers, used by Alembic.
-revision = '7da611f8586f'
+revision = '614b9a233fbf'
 down_revision = None
 branch_labels = None
 depends_on = None
@@ -24,17 +24,18 @@ def upgrade():
     sa.Column('email', sa.String(length=128), nullable=True),
     sa.Column('password_hash', sa.String(length=128), nullable=True),
     sa.Column('last_seen', sa.DateTime(), nullable=True),
+    sa.Column('about_me', sa.String(length=200), nullable=True),
     sa.PrimaryKeyConstraint('user_id')
     )
     op.create_index(op.f('ix_user_email'), 'user', ['email'], unique=True)
     op.create_index(op.f('ix_user_username'), 'user', ['username'], unique=True)
     op.create_table('post',
-    sa.Column('entry_id', sa.Integer(), nullable=False),
+    sa.Column('post_id', sa.Integer(), nullable=False),
     sa.Column('data', sa.String(length=1000), nullable=True),
     sa.Column('timestamp', sa.DateTime(), nullable=True),
     sa.Column('user_id', sa.Integer(), nullable=True),
     sa.ForeignKeyConstraint(['user_id'], ['user.user_id'], ),
-    sa.PrimaryKeyConstraint('entry_id')
+    sa.PrimaryKeyConstraint('post_id')
     )
     op.create_index(op.f('ix_post_timestamp'), 'post', ['timestamp'], unique=False)
     # ### end Alembic commands ###
